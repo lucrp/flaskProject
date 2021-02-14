@@ -92,10 +92,12 @@ Le fichier `bdd.sqlite` a été créé manuelement. Vous pouvez le supprimer et 
 1. `>>> from app import bdd`
 2. `>>> bdd.create_all()`
 3. `>>> quit()`
-4. Le fichier `bdd.sqlite` sera crée dans la racine du projet
-5. Lancer le script avec `python app.py`
-6. Aller sur `http://localhost:5000/api/push_host_infos/`
-7. Les informations système de l'agent seron sauvegardées dans la BDD
+
+**Le fichier `bdd.sqlite` sera crée dans la racine du projet. Ensuite :**
+
+- Lancer le script avec `python app.py`
+- Aller sur `http://localhost:5000/api/push_host_infos/`
+- Les informations système de l'agent seron sauvegardées dans la BDD
 
 Voici le code pour la création des Models et Schémas avec SQLAlchemy, Marshmallow et Flask:
 ```python
