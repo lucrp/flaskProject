@@ -86,10 +86,11 @@ data = {"architecture": platform.architecture()[0], "machine": platform.machine(
 
 ## Base de données
 On a choisi d'utiliser SQLAlchemy et Marshmallow avec Flask pour faciliter la création de la base de données.
-
-**Après faire le clone du projet, il faut créer les tables. Pour le faire, dans un shell Python:**
+Le fichier `bdd.sqlite` a été créé manuelement. Vous pouvez le supprimer et le récreer de la façon suivante :
+**Dans un shell Python:**
 1. `>>> from app import bdd`
 2. `>>> bdd.create_all()`
+3. Le fichier `bdd.sqlite` sera crée dans la racine du projet
 
 Voici le code pour la création des Models et Schémas avec SQLAlchemy, Marshmallow et Flask:
 ```python
