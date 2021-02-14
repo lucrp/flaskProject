@@ -5,6 +5,11 @@ Ce projet écrit en Flask récupère les informations système d'un agent, les s
 
 Le projet n'est pas encore fini. Il reste la partie pour récupérer les informations dans la Base de Données et les afficher dans une route.
 
+Pour cloner le projet : `git clone https://github.com/lucrp/flaskProject.git`
+
+Ensuite, vous pouvez récupérer les dependances avec [pipenv](https://pypi.org/project/pipenv/) ou voir le fichier `requirements.txt`
+
+
 ## Informations système
 Les informations système récupéres : 
 - architecture 
