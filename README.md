@@ -86,7 +86,8 @@ data = {"architecture": platform.architecture()[0], "machine": platform.machine(
 
 ## Base de données
 On a choisi d'utiliser SQLAlchemy et Marshmallow avec Flask pour faciliter la création de la base de données.
-Après faire le clone du projet, il faut créer les tables. Pour le faire, dans un shell Python:
+
+**Après faire le clone du projet, il faut créer les tables. Pour le faire, dans un shell Python:**
 1. `>>> from app import bdd`
 2. `>>> bdd.create_all()`
 
