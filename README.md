@@ -161,3 +161,8 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 ```
+
+## Affichage des données
+**TODO:** Pour l'affichage des données il faut construire une page HTML avec Bootstrap et Google Charts. 
+
+
