@@ -11,7 +11,7 @@ Ensuite, vous pouvez récupérer les dependances avec [pipenv](https://pypi.org/
 
 
 ## Informations système
-Les informations système récupéres : 
+Les informations système récupérés : 
 - architecture 
 - machine
 - uptime
