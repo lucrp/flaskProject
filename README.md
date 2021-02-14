@@ -77,3 +77,81 @@ data = {"architecture": platform.architecture()[0], "machine": platform.machine(
         "hostname": platform.uname()[1], "system": platform.system(), "distro_host": distInfo,
         "kernel": platform.release(), "processor": get_processor_name()}
 ```
+---
+
+## Base de données
+On a choisi d'utiliser SQLAlchemy et Marshmallow avec Flask pour faciliter la création de la base de données.
+Après faire le clone du projet, il faut créer les tables. Pour le faire, dans un shell Python:
+1. `>>> from app import bdd`
+2. `>>> bdd.create_all()`
+
+Voici le code pour la création des Models et Schémas avec SQLAlchemy, Marshmallow et Flask:
+```python
+# Init app
+app = Flask(__name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Database
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(basedir, 'bdd.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Init DB
+bdd = SQLAlchemy(app)
+# Init Marshmallow
+ma = Marshmallow(app)
+
+
+class Metrics(bdd.Model):
+    id = bdd.Column(bdd.Integer, primary_key=True)
+    architecture = bdd.Column(bdd.String(200))
+    machine = bdd.Column(bdd.String(200))
+    uptime_host = bdd.Column(bdd.String(200))
+    hostname = bdd.Column(bdd.String(200))
+    system = bdd.Column(bdd.String(200))
+    distro_host = bdd.Column(bdd.String(200))
+    kernel = bdd.Column(bdd.String(200))
+    processor = bdd.Column(bdd.String(200))
+
+    def __init__(self, architecture, machine, uptime_host, hostname, system, distro_host, kernel, processor):
+        self.architecture = architecture
+        self.machine = machine
+        self.uptime_host = uptime_host
+        self.hostname = hostname
+        self.system = system
+        self.distro_host = distro_host
+        self.kernel = kernel
+        self.processor = processor
+
+
+# Metriques Schema
+class MetricsSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'architecture', 'machine', 'uptime_host', 'hostname',
+                  'system', 'distro_host', 'kernel', 'processor')
+
+
+@app.route('/api/push_host_infos/', methods=['GET', 'POST'])
+def push_host_infos():
+    architecture = data["architecture"]
+    machine = data["machine"]
+    uptime_host = data["uptime_host"]
+    hostname = data["hostname"]
+    system = data["system"]
+    distro_host = data["distro_host"]
+    kernel = data["kernel"]
+    processor = data["processor"]
+
+    new_metrics = Metrics(architecture, machine, uptime_host, hostname, system, distro_host, kernel, processor)
+
+    bdd.session.add(new_metrics)
+    bdd.session.commit()
+    return metrics_schema.jsonify(new_metrics)
+
+
+# Init Schema
+metrics_schema = MetricsSchema()
+
+# Run Server
+if __name__ == '__main__':
+    app.run(debug=True)
+
+```
